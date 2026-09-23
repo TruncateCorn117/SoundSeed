@@ -1,0 +1,16 @@
+node_modules/
+dist/
+public/models/
+*.tsbuildinfo
+.DS_Store
+.env*
+!.env.example
+test-results/
+playwright-report/
+local-data/
+*.wav
+*.seed.json
+*.session.json
+release/
+.pnpm-store/
+__pycache__/

@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.19.0
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Prepare verified official model
+        run: pnpm setup:model
+      - name: Run unit and real-model integration tests
+        run: pnpm test
+      - name: Check types and build source
+        run: pnpm build
